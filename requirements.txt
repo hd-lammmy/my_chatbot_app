@@ -1,6 +1,3 @@
 streamlit
 pandas
 openpyxl
-sentence_transformers
-os
-datetime
