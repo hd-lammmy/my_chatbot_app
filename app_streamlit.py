@@ -187,49 +187,49 @@ elif onglet == "Assistance DxCare":
     st.subheader("🤖 Assistance sur DxCare")
     st.markdown("### 💬 Bonjour, je peux vous aider sur l'une des options suivantes :")
 
-col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-suggestions = [
-    "📁 Dossier Patient : historique, traitements, diagnostics...",
-    "💊 Prescription : médicaments, alertes, soins...",
-    "🩺 Suivi des soins : actes réalisés, planification...",
-    "🧪 Examens : résultats biologiques et imagerie...",
-    "📆 Planification : hospitalisations, lits, transferts...",
-    "🔐 Sécurité : traçabilité, contrôle d’accès, RGPD...",
-    "🧠 Aide à la décision : scores, protocoles, alertes...",
-    "📊 Reporting : tableaux de bord, indicateurs de qualité..."
-]
-
-# Répartition en deux colonnes
-for i, suggestion in enumerate(suggestions):
-    if i % 2 == 0:
-        col1.markdown(f" {suggestion}")
-    else:
-        col2.markdown(f" {suggestion}")
-
+    suggestions = [
+        "📁 Dossier Patient : historique, traitements, diagnostics...",
+        "💊 Prescription : médicaments, alertes, soins...",
+        "🩺 Suivi des soins : actes réalisés, planification...",
+        "🧪 Examens : résultats biologiques et imagerie...",
+        "📆 Planification : hospitalisations, lits, transferts...",
+        "🔐 Sécurité : traçabilité, contrôle d’accès, RGPD...",
+        "🧠 Aide à la décision : scores, protocoles, alertes...",
+        "📊 Reporting : tableaux de bord, indicateurs de qualité..."
+    ]
     
-question = st.text_input("Posez une question (ex: 'ajouter un compte rendu')")
-     
-# Traitement de la question de l'utilisateur
-if question:
-    trouve = False
-
-    # 1. Recherche exacte ou par inclusion de terme
-    for terme, reponses in faq_dxcare.items():
-        if terme in question.lower():
-            st.write("Voici les étapes :")
-            for ligne in reponses:
-                st.markdown(f"{ligne}")
-            trouve = True
-            break
-
-    # 2. Sinon, essayer de suggérer une question proche
-    if not trouve:
-        suggestion = suggérer_question(question)
-        if suggestion:
-            st.info(f"Voulez-vous dire : **{suggestion}** ?")
-            st.write("Voici les étapes :")
-            for ligne in faq_dxcare[suggestion]:
-                st.markdown(f"{ligne}")
+    # Répartition en deux colonnes
+    for i, suggestion in enumerate(suggestions):
+        if i % 2 == 0:
+            col1.markdown(f" {suggestion}")
         else:
-            st.warning("Désolé, je n'ai pas compris cette question. Essayez une autre.")
+            col2.markdown(f" {suggestion}")
+    
+        
+    question = st.text_input("Posez une question (ex: 'ajouter un compte rendu')")
+         
+    # Traitement de la question de l'utilisateur
+    if question:
+        trouve = False
+    
+        # 1. Recherche exacte ou par inclusion de terme
+        for terme, reponses in faq_dxcare.items():
+            if terme in question.lower():
+                st.write("Voici les étapes :")
+                for ligne in reponses:
+                    st.markdown(f"{ligne}")
+                trouve = True
+                break
+    
+        # 2. Sinon, essayer de suggérer une question proche
+        if not trouve:
+            suggestion = suggérer_question(question)
+            if suggestion:
+                st.info(f"Voulez-vous dire : **{suggestion}** ?")
+                st.write("Voici les étapes :")
+                for ligne in faq_dxcare[suggestion]:
+                    st.markdown(f"{ligne}")
+            else:
+                st.warning("Désolé, je n'ai pas compris cette question. Essayez une autre.")
